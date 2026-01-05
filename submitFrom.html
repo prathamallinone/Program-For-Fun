@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<script>
+    function ValidatRegisrtaionForm(){
+        debugger;
+        var fname=document.getElementById('fname').value.trim();
+        var lname=document.getElementById('lname').value;
+        if(fname===""){
+            
+            document.getElementById('fname').style.border="2px solid red";
+            //
+            document.getElementById('errorMessage').innerHTML='*Please Enter Your Frist Name';
+        
+            
+        }
+
+        if(lname===""){
+            
+            document.getElementById('lname').style.border="2px solid red";
+            document.getElementById('errorMessage1').innerHTML='*Please Enter Your Last Name';
+            
+        }
+       
+    }
+</script>
+  <meta charset="UTF-8">
+  <title>Registration Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+      padding: 20px;
+    }
+    .container {
+      width: 400px;
+      margin: auto;
+      background-color: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      box-sizing: border-box;
+    }
+    .gender, .hobbies {
+      display: flex;
+      gap: 10px;
+    }
+    .gender label, .hobbies label {
+      margin-top: 0;
+    }
+    button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Registration Form</h2>
+  <form>
+
+    <label for="fname">First Name</label>
+    <input type="text" id="fname" name="firstName" placeholder="Enter your first name" >
+    <span id ="errorMessage" style="color:red;"></span>
+
+    <label for="lname">Last Name</label>
+    <input type="text" id="lname" name="lastName" placeholder="Enter your last name" >
+    <span id ="errorMessage1" style="color:red;"></span>
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" placeholder="example@example.com" >
+
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" >
+
+    <label>Gender</label>
+    <div class="gender">
+      <label><input type="radio" name="gender" value="Male" > Male</label>
+      <label><input type="radio" name="gender" value="Female"> Female</label>
+      <label><input type="radio" name="gender" value="Other"> Other</label>
+    </div>
+
+    <label>Hobbies</label>
+    <div class="hobbies">
+      <label><input type="checkbox" name="hobbies" value="Reading"> Reading</label>
+      <label><input type="checkbox" name="hobbies" value="Traveling"> Traveling</label>
+      <label><input type="checkbox" name="hobbies" value="Sports"> Sports</label>
+    </div>
+
+    <label for="country">Country</label>
+    <select id="country" name="country" >
+      <option value="">--Select Country--</option>
+      <option value="India">India</option>
+      <option value="USA">USA</option>
+      <option value="UK">UK</option>
+      <option value="Canada">Canada</option>
+    </select>
+
+    <label for="bio">Short Bio</label>
+    <textarea id="bio" name="bio" rows="4" placeholder="Tell us about yourself..."></textarea>
+
+    <button type="button" onclick="ValidatRegisrtaionForm()">Register</button>
+  </form>
+</div>
+
+</body>
+</html>
