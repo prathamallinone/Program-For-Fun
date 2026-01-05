@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Weather App</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to right, #2193b0, #6dd5ed);
+    }
+
+    .container {
+        background: white;
+        padding: 25px;
+        width: 320px;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    input {
+        width: 90%;
+        padding: 10px;
+        margin-bottom: 12px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
+
+    button {
+        padding: 10px 20px;
+        background: #2193b0;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #197a94;
+    }
+
+    .result {
+        margin-top: 15px;
+    }
+
+    .error {
+        color: red;
+        font-weight: bold;
+    }
+
+    img {
+        width: 64px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>🌤 Weather App</h2>
+
+    <input type="text" id="city" placeholder="Enter city name">
+    <br>
+    <button onclick="getWeather()">Get Weather</button>
+
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+function getWeather() {
+    const city = document.getElementById("city").value.trim();
+    const result = document.getElementById("result");
+
+    if (city === "") {
+        result.innerHTML = "<p class='error'>Please enter a city name</p>";
+        return;
+    }
+
+    result.innerHTML = "Loading weather... ⏳";
+
+    const apiKey = "e95b017c97474922a38162751260501"; // 🔑 PUT YOUR KEY HERE
+    const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no`;
+
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("API Error");
+            }
+            return response.json();
+        })
+        .then(data => {
+            result.innerHTML = `
+                <h3>${data.location.name}, ${data.location.country}</h3>
+                <img src="https:${data.current.condition.icon}" alt="icon">
+                <p><b>Temperature:</b> ${data.current.temp_c} °C</p>
+                <p><b>Condition:</b> ${data.current.condition.text}</p>
+                <p><b>Humidity:</b> ${data.current.humidity}%</p>
+                <p><b>Wind:</b> ${data.current.wind_kph} km/h</p>
+            `;
+        })
+        .catch(error => {
+            result.innerHTML = "<p class='error'>City not found or API key invalid ❌</p>";
+        });
+}
+</script>
+
+</body>
+</html>
